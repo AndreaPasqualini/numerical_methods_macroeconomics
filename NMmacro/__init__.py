@@ -13,7 +13,7 @@ class MarkovChain:
     def n_steps_transition(self, n):
         return matrix_power(self.Pi, n)
 
-    # @property
+    @property
     def stationary_distribution(self):
         l, v = eig(self.Pi)
         vector = v[:, where(isclose(l, 1.))]
