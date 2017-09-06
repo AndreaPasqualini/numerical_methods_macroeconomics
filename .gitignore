@@ -87,4 +87,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+### Linux ###
+# Linux trashed dirs
+.Trash-*
+# Files locked for removal
+.nfs*
+
 # End of https://www.gitignore.io/api/windows,pycharm
