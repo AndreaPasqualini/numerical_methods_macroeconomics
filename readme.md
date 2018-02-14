@@ -1,9 +1,11 @@
 # Numerical Methods for Macroeconomics
 
 This repo is still in (super) early stages of its development.
-Sooner or later I will add few Python packages that contain useful code for Macroeconomic applications.
-First commits will be just general statistics- and economic-related functions, so no big deal.
 
-With time however, this should be a full-fledged library (with examples) especially aimed at learning Python for (Macro)Economic applications.
+I am expanding this repo and adding new things as the course goes on.
+For now, it is just a set of reference material: think of this as a basis for the coming work.
 
-This repository is aimed at PhD students of Macroeconomics 3 at Bocconi University.
+Given enough time, this should be a full-fledged library (with examples) especially aimed at learning Python for (Macro)Economic applications.
+
+This repository should suit the needs of the PhD students of Macroeconomics 3 at Bocconi University.
+Anybody else is free to get material from this repo and use it to fit their needs, as long as the License is noted (that is, give credit where due and you're good to go).
