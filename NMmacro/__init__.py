@@ -1,23 +1,22 @@
-from numpy import sum as summ
-from numpy import allclose, isclose, zeros, ones, where, cumsum
-from numpy.linalg import matrix_power, eig
-from numpy.random import uniform
+import numpy as np
+from scipy import linalg as la
 
 
 class MarkovChain:
+
     def __init__(self, pi):
-        if not allclose(summ(pi, axis=1), ones(pi.shape[0])):
+        if not np.allclose(np.sum(pi, axis=1), ones(pi.shape[0])):
             raise ValueError('Each row of the input matrix must sum to one.')
         self.Pi = pi
 
     def n_steps_transition(self, n):
-        return matrix_power(self.Pi, n)
+        return la.matrix_power(self.Pi, n)
 
     @property
     def stationary_distribution(self):
-        l, v = eig(self.Pi)
-        vector = v[:, where(isclose(l, 1.))]
-        return vector / summ(vector)
+        l, v = la.eig(self.Pi)
+        vector = v[:, np.where(isclose(l, 1.))]
+        return vector / np.sum(vector)
 
     def simulate(self, T, s):
         """
@@ -33,11 +32,11 @@ class MarkovChain:
             raise ValueError('Initial condition must be a row index of Pi.')
 
         def draw_state(pdf):
-            cdf = cumsum(pdf)
-            u = uniform()
-            return summ(u - cdf > 0)
+            cdf = np.cumsum(pdf)
+            u = np.random.uniform()
+            return np.sum(u - cdf > 0)
 
-        sample = zeros((T,), dtype=int)
+        sample = np.zeros((T,), dtype=int)
         sample[0] = s
         for t in range(1, T):
             sample[t] = draw_state(self.Pi[sample[t - 1], :])
