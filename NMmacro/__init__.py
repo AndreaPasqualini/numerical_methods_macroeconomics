@@ -18,7 +18,7 @@ class MarkovChain:
         vector = v[:, np.where(np.isclose(l, 1.))]
         return vector / np.sum(vector)
 
-    def simulate(self, T, s):
+    def simulate(self, T, s0):
         """
         It simulates a Markov Chain for T periods given that the initial
         state is 's'. The parameter 's' must be an integer between 0 and
@@ -26,9 +26,9 @@ class MarkovChain:
         """
         if T < 1:
             raise ValueError('The sample length T must be at least 1.')
-        if not isinstance(s, int):
+        if not isinstance(s0, int):
             raise TypeError('Initial condition must be an index (integer).')
-        if s < 0 or s > self.Pi.shape[0] - 1:
+        if s0 < 0 or s0 > self.Pi.shape[0] - 1:
             raise ValueError('Initial condition must be a row index of Pi.')
 
         def draw_state(pdf):
@@ -37,7 +37,7 @@ class MarkovChain:
             return np.sum(u - cdf > 0)
 
         sample = np.zeros((T,), dtype=int)
-        sample[0] = s
+        sample[0] = s0
         for t in range(1, T):
             sample[t] = draw_state(self.Pi[sample[t - 1], :])
 
