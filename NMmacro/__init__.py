@@ -5,7 +5,7 @@ from scipy import linalg as la
 class MarkovChain:
 
     def __init__(self, pi):
-        if not np.allclose(np.sum(pi, axis=1), ones(pi.shape[0])):
+        if not np.allclose(np.sum(pi, axis=1), np.ones(pi.shape[0])):
             raise ValueError('Each row of the input matrix must sum to one.')
         self.Pi = pi
 
@@ -15,7 +15,7 @@ class MarkovChain:
     @property
     def stationary_distribution(self):
         l, v = la.eig(self.Pi)
-        vector = v[:, np.where(isclose(l, 1.))]
+        vector = v[:, np.where(np.isclose(l, 1.))]
         return vector / np.sum(vector)
 
     def simulate(self, T, s):
