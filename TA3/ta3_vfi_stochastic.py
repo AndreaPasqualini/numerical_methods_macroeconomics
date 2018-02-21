@@ -82,6 +82,8 @@ while criterion > tolerance:
         DRk[i, :] = np.nanargmax(objective, axis=0)
     criterion = np.max(np.max(np.abs(V1 - V0)))
     V0[:] = V1
+    if n_iter % 10 == 0:
+        print('Reached ' + str(n_iter) + '-th iteration...')
 K1 = K[DRk]
 C = np.zeros((Nk, Na))
 for j in range(Na):
@@ -235,7 +237,7 @@ for a in range(3):
 
 plt.tight_layout()
 fig[0].savefig('./vfi_stochastic.pdf')
-plt.show()
+
 
 #%% Plotting simulations  =====================================================
 
@@ -301,5 +303,4 @@ ax1[1, 1].set_title('Production')
 
 plt.tight_layout()
 fig1.savefig('./simul_vfi_stochastic.pdf')
-plt.show()
 
