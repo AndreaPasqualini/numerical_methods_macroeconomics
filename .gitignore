@@ -94,3 +94,4 @@ $RECYCLE.BIN/
 .nfs*
 
 # End of https://www.gitignore.io/api/windows,pycharm
+.idea/codeStyles/codeStyleConfig.xml
