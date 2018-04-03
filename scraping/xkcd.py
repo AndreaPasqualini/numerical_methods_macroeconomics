@@ -1,7 +1,9 @@
 """
 This code showcases the use of BeautifulSoup for pedagogical purposes. It
-shows the way HTML code is parsed. It gives an idea about the way
-
+shows the way HTML code is parsed. It gives an idea about the way you can
+navigate an HTML tree.
+Read this before using BeautifulSoup:
+https://www.crummy.com/software/BeautifulSoup/zine/
 """
 
 from requests import get
