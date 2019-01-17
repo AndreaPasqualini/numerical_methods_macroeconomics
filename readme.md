@@ -21,7 +21,7 @@ There is no specific reason these are here for, except for my own gut-feeling th
 - [This overwhelming bunch of stuff](http://www.wouterdenhaan.com/notes.htm) from Wouter Den Haan
 - [The QuantEcon (Py)Lectures](https://lectures.quantecon.org/py/) website
 - [This GitHub repository](https://github.com/zhouweimin233/QuantMacro) of somebody at The University of Alabama at Birmingham with a PhD course similar to this one, with code and notebooks
-- [Gianluca Violante's course in Quantitative Macro](https://sites.google.com/a/nyu.edu/glviolante/teaching/quantmacro), referenced by the previous source
+- [Gianluca Violante's course in Quantitative Macro](https://sites.google.com/a/nyu.edu/glviolante/teaching/quantmacro) at NYU, referenced by the previous source
 - [This GitHub repo](https://github.com/jstac/nyu_macro_fall_2018) of John Stachurski for a course at NYU, with (a lot more) math-y material
 - [This GitHub repo](https://github.com/OpenSourceMacro/BootCamp2018) of OSM Boot Camp 2018, a [summer school](https://bfi.uchicago.edu/osm18) offered by uChicago
 - Aruoba, S.B. and Fernández-Villaverde, J., 2015. "A Comparison of Programming Languages in Macroeconomics." _Journal of Economic Dynamics and Control, 58_, pp.265-273 ([Published version](https://doi.org/10.1016/j.jedc.2015.05.009)) ([Working-paper version](https://www.sas.upenn.edu/~jesusfv/comparison_languages.pdf)) ([Code](https://github.com/jesusfv/Comparison-Programming-Languages-Economics)) ([Update](https://www.sas.upenn.edu/~jesusfv/Update_March_23_2018.pdf))
