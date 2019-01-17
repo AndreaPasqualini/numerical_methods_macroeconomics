@@ -1,24 +1,16 @@
 # Numerical Methods for Macroeconomics
 
-This repo is still in (super) early stages of its development.
+This repository contains material for the PhD course in Macroeconomics 3, taught by Marco Maffezzoli at Bocconi University.
+I'm the TA for the Spring 2018 and Spring 2019 iterations.
 
-I am expanding this repo and adding new things as the course goes on.
-For now, it is just a set of reference material: think of this as a basis for the coming work.
-
+However, this repo will not be limited in scope to the course.
 Given enough time, this should be a full-fledged library (with examples) especially aimed at learning Python for (Macro)Economic applications.
-
-This repository should suit the needs of the PhD students of Macroeconomics 3 at Bocconi University.
-Anybody else is free to get material from this repo and use it to fit their needs, as long as the License is noted (that is, give credit where due and you're good to go).
+I'll update this repo with teaching (or self-learning) material as I progress in life.
 
 
-## Update
+## Overview of material in this repo
 
-This repo is undergoing major maintenance.
-The _desiderata_ is
-
-- a set of Jupyter notebooks for the TA sessions I teach at Bocconi University
-- a set of examples ready to be run on your local machine
-- ~~a set of exercises (with disclosed solutions??)~~ _[unfeasible, given time left and research duties]_
+`incomplete`
 
 
 ## Where else to look for material?
