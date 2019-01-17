@@ -17,7 +17,7 @@ You can freely use the [xkcd.py](./xkcd.py) file as long as you note [Randall Mu
 
 
 # Disclaimer
-I want the reader to be aware of the following: web scraping might put you into trouble.
+I want the reader to be aware of the following: **web scraping might put you into trouble**.
 It might be illegal activity in your Country, it might violate a website Terms and Conditions or it might simply be considered unethical.
 Whatever you do with the material you find here, make sure you understand the risks and the responsibility that you are taking on.
 I suggest you read [this zine](https://www.crummy.com/software/BeautifulSoup/zine/), written by the developer of BeautifulSoup.
