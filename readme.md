@@ -1,6 +1,6 @@
 # Numerical Methods for Macroeconomics
 
-This repository contains material for the PhD course in Macroeconomics 3, taught by Marco Maffezzoli at Bocconi University.
+This repository contains material for the PhD course in [Macroeconomics 3](https://www.unibocconi.eu/wps/wcm/connect/Bocconi/SitoPubblico_EN/Navigation+Tree/Home/Programs/PhD/PhD+in+Economics+and+Finance/Courses+and+Requirements/), taught by [Marco Maffezzoli](http://faculty.unibocconi.eu/marcomaffezzoli/) at [Bocconi University](https://www.unibocconi.eu/).
 I'm the TA for the Spring 2018 and Spring 2019 iterations.
 
 However, this repo will not be limited in scope to the course.
