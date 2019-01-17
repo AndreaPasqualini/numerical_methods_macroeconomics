@@ -1,7 +1,7 @@
 # Web Scraping using BeautifulSoup
 
-The contents in this folder show examples of how to use [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) (BS) to scrape web content.
-Note that BeautifulSoup works best with websites that only use HTML code, while websites running Javascript, PHP or similar code might not play nicely with BS, and you might be unable to scrape the information you are aiming for.
+The contents in this folder show examples of how to use [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) to scrape web content.
+Note that BeautifulSoup works best with websites that only use HTML code, while websites running Javascript, PHP or similar code might not play nicely with Beautiful Soup, and you might be unable to scrape the information you are aiming at.
 
 
 ## XKCD
