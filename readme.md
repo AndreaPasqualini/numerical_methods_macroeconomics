@@ -18,7 +18,7 @@ The _desiderata_ is
 
 - a set of Jupyter notebooks for the TA sessions I teach at Bocconi University
 - a set of examples ready to be run on your local machine
-- a set of exercises (with disclosed solutions??)
+- ~~a set of exercises (with disclosed solutions??)~~ _[unfeasible, given time left and research duties]_
 
 
 ## Where else to look for material?
