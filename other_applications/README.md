@@ -6,7 +6,7 @@ Instead, I provide examples of what Python can be useful for, and economists mig
 
 ## Web-scraping with BeautifulSoup
 
-The folder [`scraping`](./scraping/) contains an example of how to use the package [beautifulsoup4](https://www.crummy.com/software/BeautifulSoup/) to programmatically retrieve certain content from the web.
+The folder [`scraping`](./scraping/) contains an example of how to use the package [`beautifulsoup4`](https://www.crummy.com/software/BeautifulSoup/) to programmatically retrieve certain content from the web.
 The code highlights the importance of analyzing the HTML structure of a webpage in order to understand where a certain piece of information can be found.
 
 Note that Beautiful Soup only parses with HTML code that is returned from a web server upon load.
