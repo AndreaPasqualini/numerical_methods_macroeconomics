@@ -34,7 +34,7 @@ class NCGM:
         self.k_ss = ((1 - (1-delta) * beta) / (alpha * beta)) ** (1 / (alpha-1))
 
 
-    def euler(self, c0, k):
+    def _euler(self, c0, k):
         """
         Implements the Euler Equation given a guess for the consumption level
         c_t and for various levels of capital holdings k_t. It returns the
@@ -178,7 +178,7 @@ class NCGM:
 
         t0 = time()
 
-        c_opt = opt.fsolve(self.euler, c0, args=k)
+        c_opt = opt.fsolve(self._euler, c0, args=k)
 
         t1 = time()
         k_opt = k ** self.alpha - c_opt + (1-self.delta) * k
