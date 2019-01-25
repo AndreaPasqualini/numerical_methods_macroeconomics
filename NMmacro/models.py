@@ -35,6 +35,11 @@ class NCGM:
 
 
     def euler(self, c0, k):
+        """
+        Implements the Euler Equation given a guess for the consumption level
+        c_t and for various levels of capital holdings k_t. It returns the
+        quantity resid = LHS - RHS.
+        """
         k1 = k**self.alpha - c0 + (1-self.delta) * k
         pc = np.polyfit(k, c0, 1)
         ctp1 = np.polyval(pc, k1)
