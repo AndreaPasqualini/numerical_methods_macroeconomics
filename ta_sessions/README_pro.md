@@ -22,7 +22,7 @@ We are going to use the following packages for the course:
 
 Additionally, you might be interested in the following packages
 
-- `jupyter` (the web-based app to produce this very document);
+- `jupyter` (the web-based app to produce [notebooks](https://jupyter.org/) with Python code and [markdown](https://daringfireball.net/projects/markdown/) commentaries);
 - `pandas` (Stata-like features to manage real-world data);
 - `sympy` (symbolic mathematics);
 - `numba` (LLVM interface and parallel computing); and
