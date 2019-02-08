@@ -1,6 +1,6 @@
-## Setting up Python like a Pro
+# Setting up Python like a Pro
 
-### A leaner way: Miniconda
+## A leaner way: Miniconda
 
 The magic behind Anaconda is called `conda`.
 It is a small [CLI](https://en.wikipedia.org/wiki/Command-line_interface) program that manages all the modules and makes sure they work together (it also manages [virtual environments](https://docs.python.org/3/library/venv.html), but that's a feature we're not going to use).
@@ -33,7 +33,7 @@ Regardless of your choice, `conda` will also pull in other necessary dependencie
 To understand the difference between Anaconda and Miniconda, you can look at the list of packages included in Anaconda (entirely omitted in Miniconda) for [Windows](https://docs.anaconda.com/anaconda/packages/py3.7_win-64/), [macOS](https://docs.anaconda.com/anaconda/packages/py3.7_osx-64/) and [Linux](https://docs.anaconda.com/anaconda/packages/py3.7_linux-64/).
 
 
-### Other useful tools
+## Other useful tools
 
 If you think you'll often deal with programming, you might want to have a look at the following great software:
 
