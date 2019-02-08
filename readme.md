@@ -24,7 +24,7 @@ At the moment, it contains an application of _Beautiful Soup_ to scrape HTML cod
 I'd like to code examples for some general data cleaning with _Pandas_, _Selenium_ and _NLTK_.
 
 
-## Where else to look for material?
+## Other references
 
 Here is a list of references and related material you might want to check out.
 There is no specific reason these are here for, except for my own gut-feeling that suggested me to put them here.
