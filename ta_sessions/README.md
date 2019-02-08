@@ -35,7 +35,7 @@ You're also going to find extra software you might want to check out.
 
 ## Structure of TA sessions
 
-This is a tentative schedule: even though most of the material is ready and present in this folder, unexpected things might come up.
+**This is a tentative schedule**: even though most of the material is ready and present in this folder, unexpected things might come up.
 However, this is what I will try to cover in each of the 6 meetings:
 
 1. Introduction to Numerical Methods in Macroeconomics and introduction to Python
