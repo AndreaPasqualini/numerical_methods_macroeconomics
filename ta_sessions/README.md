@@ -65,7 +65,7 @@ However, this is what I will try to cover in each of the 6 meetings:
 	- [Krusell and Smith (1998)](https://doi.org/10.1086/250034): overview of code and highlight of main steps (if time allows)
 	- [Reiter's (2009)](https://doi.org/10.1016/j.jedc.2008.08.010) method: solving models with idiosyncratic _and_ aggregate shocks (if time allows)
 
-For each session, there ~~is~~ will be a [Jupyter notebook](https://jupyter.org/).
+For each session, ~~there is~~ there will be a [Jupyter notebook](https://jupyter.org/).
 I might use extra material in class (e.g., slides) but they will have no additional content relative to the notebooks, so I will not post them here.
 
 
