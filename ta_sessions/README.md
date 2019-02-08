@@ -61,7 +61,7 @@ However, this is what I will try to cover in each of the 6 meetings:
 	- Replicating it
 6. Advanced tools
 	- Binning (theory in class, here only code)
-	- Transition dynamics (MIT shocks; theory in class, here only code)
+	- Transition dynamics (aka, MIT shocks; theory in class, here only code)
 	- [Krusell and Smith (1998)](https://doi.org/10.1086/250034): overview of code and highlight of main steps (if time allows)
 	- [Reiter's (2009)](https://doi.org/10.1016/j.jedc.2008.08.010) method: solving models with idiosyncratic _and_ aggregate shocks (if time allows)
 
