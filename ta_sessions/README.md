@@ -1,4 +1,4 @@
-# Numerical Methods in Macroeconomics
+# Material for TA sessions at Bocconi University
 
 ## Setting up Python for Data Science (and Macro)
 
