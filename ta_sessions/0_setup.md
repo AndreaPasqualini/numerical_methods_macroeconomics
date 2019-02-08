@@ -56,7 +56,8 @@ Additionally, you might be interested in the following packages
 - `numba` (LLVM interface and parallel computing); and
 - `xlrd` (interface to Excel files).
 
-As a function of your choice, `conda` will also pull in other necessary dependencies.
+As Python adheres to the [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy), these packages will depend on many others.
+Luckily, `conda` will pull in other necessary dependencies (it's a package manager, which main job is exactly this).
 
 To understand the difference between Anaconda and Miniconda, you can look at the list of packages included in Anaconda (entirely omitted in Miniconda) for [Windows](https://docs.anaconda.com/anaconda/packages/py3.7_win-64/), [macOS](https://docs.anaconda.com/anaconda/packages/py3.7_osx-64/) and [Linux](https://docs.anaconda.com/anaconda/packages/py3.7_linux-64/).
 
