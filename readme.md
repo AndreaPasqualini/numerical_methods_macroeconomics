@@ -20,7 +20,8 @@ The folder [`code_examples`](./code_examples) includes scripts that use the func
 It's more of a showcase than anything else.
 
 Inside [`other_applications`](./other_applications) there is some code that showcases the use of Python in applications other than numerical computation.
-At the moment, it contains an application of `beautifulsoup` to scrape HTML code found online.
+At the moment, it contains an application of _Beautiful Soup_ to scrape HTML code found online.
+I'd like to code examples for some general data cleaning with _Pandas_, _Selenium_ and _NLTK_.
 
 
 ## Where else to look for material?
