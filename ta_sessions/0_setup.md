@@ -1,9 +1,6 @@
 # Setting up Python for Data Science (and Macro)
 
 These are instructions you might want to follow if you want to set up your local machine (e.g., your laptop) to run Python.
-I will also include details about the main packages we need.
-
-The following instructions hold for Windows, Mac OS and Linux.
 
 
 ## Installing Python through Anaconda
