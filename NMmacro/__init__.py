@@ -21,7 +21,7 @@ class MarkovChain:
     def simulate(self, T, s0):
         """
         It simulates a Markov Chain for T periods given that the initial
-        state is 's'. The parameter 's' must be an integer between 0 and
+        state is 's'. The parameter 's0' must be an integer between 0 and
         Pi.shape[0]-1
         """
         if T < 1:

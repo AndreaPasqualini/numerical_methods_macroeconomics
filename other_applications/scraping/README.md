@@ -1,7 +1,7 @@
 # Web Scraping using BeautifulSoup
 
-The contents in this folder show examples of how to use [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) (BS) to scrape web content.
-Note that BeautifulSoup works best with websites that only use HTML code, while websites running Javascript, PHP or similar code might not play nicely with BS, and you might be unable to scrape the information you are aiming for.
+The contents in this folder show examples of how to use [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) to scrape web content.
+Note that BeautifulSoup works best with websites that only use HTML code, while websites running Javascript, PHP or similar code might not play nicely with Beautiful Soup, and you might be unable to scrape the information you are aiming at.
 
 
 ## XKCD
@@ -17,8 +17,8 @@ You can freely use the [xkcd.py](./xkcd.py) file as long as you note [Randall Mu
 
 
 # Disclaimer
-I want the reader to be aware of the following: web scraping might put you into trouble.
+I want the reader to be aware of the following: **web scraping might put you into trouble**.
 It might be illegal activity in your Country, it might violate a website Terms and Conditions or it might simply be considered unethical.
 Whatever you do with the material you find here, make sure you understand the risks and the responsibility that you are taking on.
-I suggest you read [this zine](https://www.crummy.com/software/BeautifulSoup/zine/), written by the developer of BeautifulSoup.
+I suggest you read [this zine](https://www.crummy.com/software/BeautifulSoup/zine/), written by the developer of Beautiful Soup.
 Let me also remind you that the code you find here is covered by the [MIT license](../LICENSE), meaning in particular that I do not share the responsibility of what _you_ do with my code.
