@@ -9,8 +9,8 @@ This script showcases the use of the class NMmacro.models.NCGM that I wrote.
 
 #%% Importing necessary packages and setting up working directory
 
-import os
-os.chdir('C:/Users/Andrea/Documents/GitHub/numerical_methods_macroeconomics')
+import sys
+sys.path.insert('../')
 
 import numpy as np
 from NMmacro.models import NCGM
