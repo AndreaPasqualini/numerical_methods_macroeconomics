@@ -31,7 +31,7 @@ class NCGM:
         self.gamma = gamma
         self.delta = delta
         self.u = lambda c: (c**(1-self.gamma)) / (1-self.gamma)
-        self.k_ss = ((1 - (1-delta) * beta) / (alpha * beta)) ** (1 / (alpha-1))
+        self.k_ss = ((1 - (1-delta) * beta) / (alpha * beta))**(1 / (alpha-1))
 
 
     def _euler(self, c0, k):
