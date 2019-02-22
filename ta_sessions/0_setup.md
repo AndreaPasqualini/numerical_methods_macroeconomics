@@ -11,7 +11,7 @@ Yes, but not much: you'll need additional applications.
 With Python, we need [modules](https://docs.python.org/3/tutorial/modules.html).
 
 As [it is not easy to manage modules](https://en.wikipedia.org/wiki/Dependency_hell) manually, we're going to need a [package manager](https://en.wikipedia.org/wiki/Package_manager).
-The one we choose for this setup is [Anaconda](https://www.anaconda.com/), which is popular among people who need to do numerical and stastical work (some prefer calling it data science).
+The one we choose for this setup is [Anaconda](https://www.anaconda.com/), which is popular among people who need to do numerical and statistical work (some prefer calling it data science).
 
 Go to https://www.anaconda.com/download/ and download the file that is relevant for your OS.
 You should choose the Python 3.x version, as the 2.x is [legacy (read: old) software](https://en.wikipedia.org/wiki/Legacy_system) that is there for compatibility (i.e., targeting audiences different from us).
