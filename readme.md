@@ -1,5 +1,7 @@
 # Numerical Methods for Macroeconomics
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/apsql/numerical_methods_macroeconomics/master)
+
 This repository contains material for the PhD course in [Macroeconomics 3](https://www.unibocconi.eu/wps/wcm/connect/Bocconi/SitoPubblico_EN/Navigation+Tree/Home/Programs/PhD/PhD+in+Economics+and+Finance/Courses+and+Requirements/), taught by [Marco Maffezzoli](http://faculty.unibocconi.eu/marcomaffezzoli/) at [Bocconi University](https://www.unibocconi.eu/).
 I'm the TA for the Spring 2018 and Spring 2019 iterations.
 
