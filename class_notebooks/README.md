@@ -1,6 +1,6 @@
 # How to use Jupyter Notebooks
 
-This year I will use Jupyter Notebook as main interface during our classes.
+This year I will use Jupyter Notebooks as main interface during our classes.
 Using these notebooks will not be obvious at first.
 Opening and editing them is not similar to opening a Stata or Matlab window.
 Instead, we need to launch the Jupyter session from the terminal.
@@ -102,7 +102,7 @@ To see them, go to Help -> Keyboard Shortcuts.
 Good question!
 [Spyder](https://www.spyder-ide.org/) is a traditional-looking [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment) that resembles applications like Matlab and RStudio.
 
-I have three reasons for using notebooks as opposed to show stuff in an IDE.
+I have four reasons for using notebooks as opposed to show stuff in an IDE.
 
 1. Using Jupyter Notebooks is more pedagogical.
    While I will exclusively use code cells in class, you will have the template of the notebook, so that you can use markdown cells to write your own comments.
@@ -120,7 +120,7 @@ I have three reasons for using notebooks as opposed to show stuff in an IDE.
    Some people use Beamer to create their posters for conferences.
    Some people use PowerPoint to create graphs that are then included in their LaTeX documents.
    We are competent people who should use the right tool for the right job.
-   Using Jupyter Notebooks allows me to show how we can use web technologies to make our job a bit easier or more exciting (I use notebooks all the time for my research!).
+   Using Jupyter Notebooks allows me to show how we can use web technologies to make our job a bit easier or more exciting (I use notebooks all the time for my research).
    Also consider that, at some point, you will need to come up with a personal website.
    Jupyter Notebooks can easily be embedded in your website, if you want to show off your skills.
 1. The choice of IDE is a very personal one.
@@ -131,4 +131,6 @@ I have three reasons for using notebooks as opposed to show stuff in an IDE.
    PyCharm and Visual Studio Code are other popular alternatives.
    Linux people may also bring Vim to the table.
    Who am I to choose the IDE for you?
-   This question, together with the fact that this is a teaching situation, made me move away from IDEs.
+
+None of these points _alone_ justifies my decision to move to Jupyter Notebooks.
+However, all of them combined conviced me.
