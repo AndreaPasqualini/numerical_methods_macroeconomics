@@ -101,6 +101,7 @@ To see them, go to Help -> Keyboard Shortcuts.
 
 Good question!
 [Spyder](https://www.spyder-ide.org/) is a traditional-looking [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment) that resembles applications like Matlab and RStudio.
+![Spyder](spyder.png)
 
 I have four reasons for using notebooks as opposed to show stuff in an IDE.
 
@@ -133,4 +134,4 @@ I have four reasons for using notebooks as opposed to show stuff in an IDE.
    Who am I to choose the IDE for you?
 
 None of these points _alone_ justifies my decision to move to Jupyter Notebooks.
-However, all of them combined conviced me.
+However, all of them combined convinced me.
