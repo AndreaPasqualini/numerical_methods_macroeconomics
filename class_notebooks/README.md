@@ -52,7 +52,7 @@ As you work, there will be additional lines printed to the terminal: you should 
 
 Your default web browser will automatically start (or be brought to the foreground), and it will yield a window like the following.
 
-![Jupyter Home](jupyter_home.png)
+![Jupyter Home](./img/jupyter_home.png)
 
 Although you operate through a web browser, all you see in this window is happening locally on your computer.
 This is to say that there are no security concerns at this stage.
@@ -62,7 +62,7 @@ Jupyter Notebooks carry the file extension `.ipynb`.
 
 Once you open a notebook, you will be greeted by a screen similar to the following.
 
-![Jupyter Notebook](jupyter_notebook.png)
+![Jupyter Notebook](./img/jupyter_notebook.png)
 
 
 ## The basics of Jupyter Notebooks
@@ -74,7 +74,7 @@ However, I can provide an overview of the basics.
 From the navigation window (the one where you can browse your files) create a new notebook.
 It will look like this.
 
-![New Notebook](jupyter_notebook_new.png)
+![New Notebook](./img/jupyter_notebook_new.png)
 
 Except from the header and the toolbar, you only see one thing: a _cell_.
 There are two main types of cells: _code_ cells and _markdown_ cells.
@@ -101,7 +101,7 @@ To see them, go to Help -> Keyboard Shortcuts.
 
 Good question!
 [Spyder](https://www.spyder-ide.org/) is a traditional-looking [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment) that resembles applications like Matlab and RStudio.
-![Spyder](spyder.png)
+![Spyder](./img/spyder.png)
 
 I have four reasons for using notebooks as opposed to show stuff in an IDE.
 
