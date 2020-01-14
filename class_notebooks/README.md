@@ -128,7 +128,7 @@ I have four reasons for using notebooks as opposed to show stuff in an IDE.
    Discussion around the question _"What IDE is best for programming language \_\_\_?"_ just goes on indefinitely.
    Spyder may be the first choice (as it has been in the previous two iterations of this course) because it comes together with Anaconda.
    Its interface is familiar to Matlab or RStudio users.
-   But Spyder it not the only IDE for Python out there.
+   But Spyder is not the only IDE for Python out there.
    [PyCharm](https://www.jetbrains.com/pycharm/) and [Visual Studio Code](https://code.visualstudio.com/) are other popular alternatives.
    Linux people may also bring [Vim](https://www.vim.org/) to the table.
    Who am I to choose the IDE for you?
