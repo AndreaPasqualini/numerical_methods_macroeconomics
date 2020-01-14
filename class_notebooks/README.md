@@ -129,8 +129,8 @@ I have four reasons for using notebooks as opposed to show stuff in an IDE.
    Spyder may be the first choice (as it has been in the previous two iterations of this course) because it comes together with Anaconda.
    Its interface is familiar to Matlab or RStudio users.
    But Spyder it not the only IDE for Python out there.
-   PyCharm and Visual Studio Code are other popular alternatives.
-   Linux people may also bring Vim to the table.
+   [PyCharm](https://www.jetbrains.com/pycharm/) and [Visual Studio Code](https://code.visualstudio.com/) are other popular alternatives.
+   Linux people may also bring [Vim](https://www.vim.org/) to the table.
    Who am I to choose the IDE for you?
 
 None of these points _alone_ justifies my decision to move to Jupyter Notebooks.
