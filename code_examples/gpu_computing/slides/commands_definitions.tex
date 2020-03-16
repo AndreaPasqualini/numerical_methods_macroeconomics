@@ -1,0 +1,64 @@
+\newcommand{\code}[1]{\texttt{\smaller#1}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{Cov}}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{bggray}{rgb}{0.95,0.95,0.975}
+
+\lstdefinestyle{prompt}{ %
+	backgroundcolor=\color{bggray},
+	basicstyle=\ttfamily\footnotesize,
+	language=bash,
+	frame=none,
+	morekeywords={\$},
+	keywordstyle=\ttfamily\sl,
+	numbers=left,
+	numberstyle=\ttfamily\tiny\color{mygray},
+	autogobble=true
+}
+
+\lstdefinestyle{python_output}{ %
+	backgroundcolor=\color{bggray},
+	basicstyle=\ttfamily\footnotesize,
+	language=bash,
+	frame=none,
+	keywordstyle=\color{black},
+	numbers=left,
+	numberstyle=\ttfamily\tiny\color{mygray},
+	stringstyle=\color{black},
+	autogobble=true
+}
+
+\lstset{ %
+	backgroundcolor=\color{bggray},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\ttfamily\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=none,                      % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=Python,                 % the language of the code
+	morekeywords={*,True,False,numpy,scipy,matplotlib,np,sc,plt,la,linalg,whos,det,inv,diag,array,allclose,linspace,pyplot,plt,show,subplots,plot,grid,legend,set_xlabel,set_ylabel,set_title,argmax,num,linewidth,color,label,rc,usetex,math,pandas,DataFrame,random,zeros,nanmax,nanargmax,nan,ones,polyfit,polyval,optimize,fsolve,interpolate,interp1d,stats,norm,diff,cdf,pdf,reshape,polynomial,hermite,hermgauss,sqrt,fftpack,as,sparse,spmatrix,jit,njit,cuda,vectorize,guvectorize,stencil,@jit,@njit,@cuda,@vectorize,@guvectorize,@stencil...},       % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\ttfamily\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{mygray},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,						 % sets default tabsize to 2 spaces
+	autogobble=true%,	             % adjusts indentation and newline characters
+	%title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
