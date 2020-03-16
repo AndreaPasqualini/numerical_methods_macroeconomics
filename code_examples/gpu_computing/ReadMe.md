@@ -29,7 +29,7 @@ I ran the code on an [Asus N550JK "VivoBook Pro"](https://www.asus.com/Laptops/N
 - 256 GB SSD, SATA 3 (6 GB/s)
 - [Ubuntu](https://ubuntu.com/desktop) 19.10 (Linux kernel 5.3.0)
 
-I installed Miniconda and the following
+I installed Miniconda and the following packages
 
 ```bash
 $ conda install numpy numba pandas tqdm cudatoolkit=10.1.243
