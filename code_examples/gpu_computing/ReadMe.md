@@ -10,7 +10,7 @@ This folder contains resources I used to create a class on GPU computing.
 
 The file [`loop.sh`](./loop.sh) executes [`loop.py`](./loop.py) and [`loop.c`](./loop.c).
 You need to have both a shell-compatible interpreter (e.g., Bash, zsh) and a GCC-compatible compiler.
-Linux and macOS have both out-of-the-box (Debian---and derivatives---users may need to `apt install build-essential`)
+Linux and macOS have both out-of-the-box (Debian---and derivatives---users may need to `apt install build-essential`).
 Windows has none by default, although you can easily obtain them through the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (WSL).
 
 The `time` function in [`loop.sh`](./loop.sh) is intended as the [Bash/zsh keyword](https://en.wikipedia.org/wiki/Time_(Unix)#Bash) and not as the [standalone GNU program](https://en.wikipedia.org/wiki/Time_(Unix)), although both do the same thing, essentially.
