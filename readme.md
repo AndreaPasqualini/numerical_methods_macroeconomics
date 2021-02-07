@@ -15,7 +15,7 @@ I'll update this repo with teaching (or self-learning) material as I progress in
 The folder [`ta_sessions`](./ta_sessions) contains Jupyter notebooks covering material for (surprise surprise) the TA sessions of the course mentioned above.
 
 The package [`NMmacro`](./NMmacro) contains code developed around the topics of the course.
-The code that can be re-used for various appllications.
+The code that can be re-used for various applications.
 However, it has not been developed with generality in mind: code in the package is tailored for the sake of teaching how to deal with classical examples in Economics.
 
 The folder [`code_examples`](./code_examples) includes scripts that use the functions and classes written in [`NMmacro`](./NMmacro).
