@@ -3,7 +3,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/apsql/numerical_methods_macroeconomics/master)
 
 This repository contains material for the PhD course in [Macroeconomics 3](https://www.unibocconi.eu/wps/wcm/connect/Bocconi/SitoPubblico_EN/Navigation+Tree/Home/Programs/PhD/PhD+in+Economics+and+Finance/Courses+and+Requirements/), taught by [Marco Maffezzoli](http://faculty.unibocconi.eu/marcomaffezzoli/) at [Bocconi University](https://www.unibocconi.eu/).
-I'm the TA for the Spring 2018, Spring 2019 and Spring 2020 iterations.
+I'm the TA for the Spring 2018, Spring 2019, Spring 2020 and Spring 2021 iterations.
 
 However, this repo will not be limited in scope to the course.
 Given enough time, this should be a full-fledged library (with examples) especially aimed at learning Python for (Macro)Economic applications.
@@ -15,7 +15,7 @@ I'll update this repo with teaching (or self-learning) material as I progress in
 The folder [`ta_sessions`](./ta_sessions) contains Jupyter notebooks covering material for (surprise surprise) the TA sessions of the course mentioned above.
 
 The package [`NMmacro`](./NMmacro) contains code developed around the topics of the course.
-The code that can be re-used for various appllications.
+The code that can be re-used for various applications.
 However, it has not been developed with generality in mind: code in the package is tailored for the sake of teaching how to deal with classical examples in Economics.
 
 The folder [`code_examples`](./code_examples) includes scripts that use the functions and classes written in [`NMmacro`](./NMmacro).

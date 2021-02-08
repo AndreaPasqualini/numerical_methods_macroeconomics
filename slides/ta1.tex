@@ -1,0 +1,354 @@
+\documentclass[10pt, aspectratio=1610, handout]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{txfonts}
+% \usepackage{roboto}
+\usepackage[T1]{fontenc}
+\usepackage{appendixnumberbeamer}
+
+\setbeamertemplate{navigation symbols}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\email}[1]{\href{mailto:#1}{#1}}
+\newcommand{\website}[1]{\href{https://#1}{#1}}
+
+\title[Intro to Numerical Methods for Macro]{
+  \textbf{Introduction to Numerical Methods for Macroeconomics}
+}
+
+\subtitle[Macro 3: TA\#1]{
+  \textbf{Macroeconomics 3:} TA class \#1
+}
+
+\author[A.~Pasqualini]{
+  Andrea Pasqualini
+}
+
+\institute[Bocconi]{Bocconi University}
+
+\date{
+  8 February 2021
+}
+
+\begin{document}
+
+  \begin{frame}
+    \maketitle
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{About Myself}
+
+    Hi, I am Andrea Pasqualini!
+
+    \vfill\pause
+
+    \begin{itemize}
+      \item Graduated a couple of weeks ago! (yay!)
+      \item Research interests: Banking, Macroeconomics
+      \item JMP: markups on lending rates and markdowns on deposit rates
+      \item Side project: Unemployment, SDFs and Dual Labor Markets in Europe
+    \end{itemize}
+
+    \vfill\pause
+
+    \begin{description}
+      \item[Email] \email{andrea.pasqualini@unibocconi.it} (also for MS Teams)
+      \item[Website] \website{andrea.pasqualini.io}
+      \item[Office] 5-E2-FM02
+      \item[Material] \href{https://github.com/AndreaPasqualini/numerical_methods_macroeconomics}{https://github.com/AndreaPasqualini/numerical\_methods\_macroeconomics}
+    \end{description}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{About the TA Classes for Macro 3}
+
+    \begin{itemize}
+      \item So far, you saw the theoretical tools in Macroeconomics
+      \item Now it's time for fun: empirical tools!
+    \end{itemize}
+
+    \vfill\pause
+
+    \begin{itemize}
+      \item Solving Macro models analytically may be impossible (it is, very often)
+      \item Need to obtain numerical solutions
+      \item Two options
+        \begin{itemize}
+          \item Perturbation methods
+          \item Projection methods
+        \end{itemize}
+    \end{itemize}
+
+    \vfill\pause
+
+    \begin{itemize}
+      \item These TA classes: \textbf{projection methods}
+      \item Applications: \textbf{macro models with heterogeneous agents}
+    \end{itemize}
+
+    \vfill\pause
+
+    Objective: \textbf{get familiar with projection methods and related applications}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{About the Tools}
+
+    Objective: \textbf{manipulate numerical objects (e.g., matrices), plot results}
+
+    \vfill\pause
+
+    \begin{itemize}
+      \item Many options available: Matlab, R, Python, etc.
+      \item This course: Python
+    \end{itemize}
+
+    \vfill\pause
+
+    Advantages of Python
+    \begin{itemize}
+      \item Free and open-source, reliable tool
+      \item Unbeatable flexibility
+    \end{itemize}
+
+    \vfill\pause
+
+    \begin{itemize}
+      \item Many options to work with Python: VSCode, Spyder, PyCharm, Jupyter Notebooks, etc.
+      \item These classes: Jupyter Notebooks (VSCode behind the scenes)
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Intro to Numerical Methods for Economists}
+
+    Objective: \textbf{solve a model}
+
+    \vfill\pause
+
+    \begin{description}
+      \item[What?] $\E_t \left( f \left( X_{t-1}, X_t, X_{t+1} \right) \right) = 0$ \hspace{2em} \textcolor{gray}{(only rational expectations)}
+      \pause
+      \item[Who?] Economists in Macroeconomics, Development Econ, Applied Micro
+      \pause
+      \item[Why?] Obtain predictions and counterfactuals, compare with data
+      \pause
+      \item[How?] Techniques based on a model's mathematical properties
+      \pause
+      \item[When?] All the effing time
+    \end{description}
+
+    \vfill\pause
+
+    \begin{columns}
+      \begin{column}{0.475\textwidth}
+        \begin{block}{Perturbation methods}
+          \begin{itemize}
+            \item Rely on Taylor expansion
+            \item Require differentiability of the model
+            \item Low computational costs
+          \end{itemize}
+        \end{block}
+      \end{column}
+      \begin{column}{0.475\textwidth}
+        \begin{block}{Projection methods}
+          \begin{itemize}
+            \item Rely on Bellman equations
+            \item Allow for heterogeneity, discontinuities
+            \item High computational costs
+          \end{itemize}
+        \end{block}
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Intro to Numerical Methods for Economists: Hands-on Example}
+
+    Example: \textbf{Neoclassical Stochastic Growth Model}
+    \begin{align*}
+      \max_{C_t, K_{t+1}} &\; \E_0 \sum_{t=0}^{\infty} \beta^t u(C_t) \\
+      \text{s.t.} &\; \begin{cases}
+        C_t + K_{t+1} = Z_t K_t^\alpha + (1 + \delta) K_{t-1} &\forall\ t\\
+        \log(Z_{t+1}) = (1-\rho) \mu + \rho \log(Z_t) + \log(\varepsilon_{t+1}) &\forall\ t\\
+        \varepsilon_{t+1} \overset{iid}{\sim} \mathcal{N}(0, \sigma^2) &\forall\ t\\
+        C_t, K_{t+1} > 0 &\forall\ t\\
+        K_{0}, Z_{0} \text{ given}
+      \end{cases}
+    \end{align*}
+
+    \vfill\pause
+
+    \begin{columns}[T]
+      \begin{column}{0.475\textwidth}
+        Variables
+        \begin{itemize}
+          \item Endogenously predetermined: $Z_t$, $K_t$
+          \item Exogenous shocks: $\varepsilon_{t+1}$
+          \item Controls: $C_t$, $K_{t+1}$
+          \item Forward looking: $C_{t+1}$
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.475\textwidth}
+        Equations for the equilibrium
+        \begin{equation*}
+          \begin{cases}
+            u'(C_t) = \beta \cdot \E_t \left( u'(C_{t+1}) \left[ \alpha K_{t+1}^{\alpha-1} + 1 - \delta \right] \right) \\
+            C_t + K_{t+1} = Z_t K_t^\alpha + (1 + \delta) K_t  \\
+            \log(Z_{t+1}) = (1-\rho) \mu + \rho \log(Z_t) + \log(\varepsilon_{t+1})
+          \end{cases}
+        \end{equation*}
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+
+  \begin{frame}
+    \frametitle{Intro to Numerical Methods for Economists: Perturbation Methods}
+
+    \textbf{Focus on the equations that characterize the equilibrium (w/ CRRA utility)}
+    \begin{equation*}
+      \begin{cases}
+        C_t^{-\gamma} = \beta \cdot \E_t \left( C_{t+1}^{-\gamma} \left[ \alpha K_{t+1}^{\alpha-1} + 1 - \delta \right] \right) \\
+        C_t + K_{t+1} = Z_t K_t^\alpha + (1 + \delta) K_t  \\
+        \log(Z_{t+1}) = (1-\rho) \mu + \rho \log(Z_t) + \log(\varepsilon_{t+1})
+      \end{cases}
+    \end{equation*}
+
+    \vfill\pause
+
+    There exist
+    \begin{itemize}
+      \item A (deterministic) steady state
+      \item Derivatives of each equation
+    \end{itemize}
+
+    \vfill\pause
+
+    Log-linear representation of the model (1\textsuperscript{st} order Taylor expansion around the steady state)
+    \begin{equation*}
+      \begin{cases}
+        c_t = \E_t ( c_{t+1} ) - \frac{1}{\gamma} \E_t \left( \alpha + (\alpha-1) k_{t+1} \right) \\
+        c_t + k_{t+1} = z_t + \alpha k_t + (1+\delta) k_t \\
+        z_{t+1} = \rho z_t + \log(\varepsilon_{t+1})
+      \end{cases}
+    \end{equation*}
+
+    \vfill\pause
+
+    Can solve this system of linear equations with linear algebra (e.g., Schur decomposition)
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Intro to Numerical Methods for Economists: Projection Methods}
+
+    \textbf{Focus on the optimization problem (write the associated Bellman equation)}
+    \begin{align*}
+      V(K, Z) = \max_{C, K'} &\; u(C) + \beta \E \left( V(K', Z') | Z \right) \\
+      \text{s.t.} &\; \begin{cases}
+        C + K' = Z K^\alpha + (1 + \delta) K \\
+        \log(Z') = (1-\rho) \mu + \rho \log(Z) + \log(\varepsilon'), & \varepsilon' \overset{iid}{\sim} \mathcal{N}(0, \sigma^2) %\\ C, K' > 0
+      \end{cases}
+    \end{align*}
+
+    \vfill\pause
+
+    There exists
+    \begin{itemize}
+      \item A contraction mapping $\mathbf{T}$ induced by the ``max'' operator
+      \item A unique fixed point $V(K, Z)$
+    \end{itemize}
+
+    \vfill\pause
+
+    In a computer
+    \begin{itemize}
+      \item Define the domains for $K$ and $Z$
+      \item Define a function that maximizes $u(C) + \beta \E (\ldots) \text{ s.t.} \ldots$
+      \item Iterate the function until convergence
+    \end{itemize}
+
+    \vfill\pause
+
+    Can crack this by letting the computer loop the contraction mapping $\mathbf{T}$
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Intro to Numerical Methods for Economists: Projection Methods (cont'd)}
+
+    For more complicated supply-demand models (let the ``real'' equilibrium price be $P^*$)
+    \begin{enumerate}
+      \item Guess an equilibrium price $P^{(h)}$
+      \item Obtain the policy functions associated to the Bellman equation, for the given price $P^{(h)}$
+      \item Define the excess demand function $D(P)$
+      \item Observe that $D(P)$ is decreasing in $P$
+        \begin{itemize}
+          \item If $D(P^{(h)}) > 0$, then $P^{(h)} < P^*$
+          \item If $D(P^{(h)}) < 0$, then $P^{(h)} > P^*$
+        \end{itemize}
+      \item Propose a new guess $P^{(h+1)}$ accordingly
+      \item Repeat steps 1--5 until $| P^{(h+1)} - P^{(h)} | < \epsilon$
+    \end{enumerate}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Intro to Numerical Methods for Economists: Takeaway's}
+
+    We will see both projection (these classes) and perturbation methods (in Macro 4, hopefully)
+
+    \vfill\pause
+
+    What do we do with these numbers? E.g.
+    \begin{itemize}
+      \item Analyses of policy functions (if non-trivial)
+      \item Impulse-Response Functions (IRFs)
+      \item Counterfactual simulations
+    \end{itemize}
+
+    \vfill\pause
+
+    Why do we need all of this?
+    \begin{itemize}
+      \item Can a mechanism explain macro phenomena? Write model, see variables move up/down
+      \item Do these mechanisms matter quantitatively? Write model, compare simulations with data
+    \end{itemize}
+
+    \vfill\pause
+
+    Why do projection methods matter?
+    \begin{itemize}
+      \item Models that suffer from derivatives (i.e., where higher order moments matter)
+      \item Models with heterogeneous agents
+      \item Models with binding constraits
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Intro to Python}
+
+    Moving to a Jupyter Notebook
+
+  \end{frame}
+
+\end{document}
