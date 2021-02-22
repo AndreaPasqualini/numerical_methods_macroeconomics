@@ -1,0 +1,475 @@
+\documentclass[10pt, aspectratio=1610, handout]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{txfonts}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{appendixnumberbeamer,booktabs,tikz,pgfplots}
+\pgfplotsset{compat=1.17}
+
+\setbeamertemplate{navigation symbols}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+\definecolor{dimgray}{RGB}{170, 170, 170}
+\definecolor{alert}{RGB}{220, 0, 0}
+\definecolor{main}{RGB}{51, 51, 179}
+\definecolor{background}{RGB}{255, 255, 255}
+\newcommand{\dimmer}[1]{\textcolor{dimgray}{#1}}
+\newcommand{\gotobutton}[2]{\hyperlink{#1}{\beamergotobutton{#2}}}
+\newcommand{\backbutton}[1]{\hyperlink{#1}{\beamerreturnbutton{Back}}}
+\newcommand{\gototitlebutton}[2]{\hfill\gotobutton{#1}{#2}}
+\newcommand{\backtitlebutton}[1]{\hfill\backbutton{#1}}
+\setbeamercolor{button}{bg=main,fg=background}
+\setbeamercolor{alerted text}{fg=alert}
+
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\email}[1]{\href{mailto:#1}{#1}}
+\newcommand{\website}[1]{\href{https://#1}{#1}}
+
+\title[VFI, PFI and DP]{
+  \textbf{VFI, PFI and DP in Stochastic Environments}
+}
+
+\subtitle[Macro 3: TA\#3]{
+  \textbf{Macroeconomics 3:} TA class \#3
+}
+
+\author[A.~Pasqualini]{
+  Andrea Pasqualini
+}
+
+\institute[Bocconi]{Bocconi University}
+
+\date{
+  15 February 2021
+}
+
+\begin{document}
+
+  \begin{frame}
+    \maketitle
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Plan for Today}
+
+    Objective: \textbf{Solve numerically for $V(K, A)$ and $K'(K, A)$}
+
+    \vfill\pause
+
+    Operating example: Neoclassical Growth Model (stochastic version)
+    \begin{align*}
+      V(K, \alert{A}) \equiv \max_{C, K'} &\; \frac{C^{1 - \gamma}}{1 - \gamma} + \beta \alert{\E} \left( V(K', \alert{A'}) \alert{| A} \right) \\
+      \text{s.t.} &\;
+      \begin{cases}
+        C + K' \leq \alert{A} K^\alpha + (1 - \delta) K \\
+        C, K' > 0 \\
+        \alert{\log(A') = (1-\rho) \log(\mu) + \rho \log(A) + \epsilon} \\
+        \alert{\epsilon \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)}
+      \end{cases}
+    \end{align*}
+
+    \vfill\pause
+
+    \begin{columns}[T]
+      \begin{column}{0.45\textwidth}
+        \begin{itemize}
+          \item Same methods as last time
+          \item Same objects of interest
+          \item Adding discretization methods for time series processes
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.45\textwidth}
+        Shocks are operationally useful
+        \begin{itemize}
+          \item Simulations
+          \item Impulse-Response Functions
+          \item Forecast Error-Variance Decomposition
+        \end{itemize}
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{The Discretization Problem}
+
+    Objective: \textbf{approximate a continuous stochastic process with a discrete one}
+
+    \vfill\pause
+
+    Same problem faced in our last class: the computer has no concept of set density
+
+    \vfill\pause
+
+    \begin{align*}
+      \log(A') &= (1 - \rho) \log(\mu) + \rho \log(A) + \epsilon & \epsilon \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)
+    \end{align*}
+    \begin{align*}
+      \underbrace{\begin{bmatrix}
+        \log(A_1) \\ \log(A_2) \\ \vdots \\ \log(A_m)
+      \end{bmatrix}}_{\text{grid for $\log(A)$}}
+      &=
+      \underbrace{\begin{bmatrix}
+        \Pi_{1,1} & \Pi_{1,2} & \cdots & \Pi_{1,m} \\
+        \Pi_{2,1} & \Pi_{2,2} & \cdots & \Pi_{2,m} \\
+        \vdots    & \vdots    & \ddots & \vdots    \\
+        \Pi_{m,1} & \Pi_{m,2} & \cdots & \Pi_{m,m} \\
+      \end{bmatrix}}_{\text{transition probabilities, $\Pi$}}
+      \cdot
+      \underbrace{\begin{bmatrix}
+        \log(A_1) \\ \log(A_2) \\ \vdots \\ \log(A_m)
+      \end{bmatrix}}_{\text{grid for $\log(A)$}}
+    \end{align*}
+
+    \vfill\pause
+
+    \begin{itemize}
+      \item Need to set up a grid for $A$ \dimmer{(same as before)}
+      \item Need to figure out the transition probabilities \dimmer{(new!)}
+        \begin{itemize}
+          \item Important to compute the conditional expected continuation value $\E \left( V(K', A') | A \right)$
+        \end{itemize}
+    \end{itemize}
+
+  \end{frame}
+
+ \begin{frame}
+    \frametitle{The Discretization Problem (cont'd)}
+
+    Objective: \textbf{approximate a continuous stochastic process with a discrete one}
+
+    \vfill
+
+    \begin{columns}
+      \begin{column}{0.35\textwidth}
+        Must match
+        \begin{itemize}
+          \item Unconditional exp.~value
+          \item Conditional exp.~value
+          \item Unconditional variance
+          \item Conditional variance
+          \item (Optional) skewness
+          \item (Optional) kurtosis
+          \item (Optional) higher-order moments
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.6\textwidth}
+        \begin{figure}
+          \centering
+          \begin{tikzpicture}
+            \begin{axis}[footnotesize, width=8cm, height=7cm, domain=-3:3, xtick={-3, -2, -1, 0, 1, 2, 3}, ytick={0, 0.1, 0.2, 0.3, 0.4}, xmajorgrids=true, ymajorgrids=true, grid style=dashed, title={$\log(Z')|Z \sim \mathcal{N}(0, 1)$}]
+              \addplot[samples=500, alert, very thick]{exp(-x^2) / (sqrt(2 * pi))};
+              \only<2->{\addplot[ybar interval, fill=main, opacity=0.2] coordinates {(-2.5, 0.032) (-1.5, 0.183) (-0.5, 0.387) (0.5, 0.183) (1.5, 0.032) (2.5, 0)};}
+            \end{axis}
+          \end{tikzpicture}
+
+          {\scriptsize\dimmer{\textbf{Note:} the parameters in this figure are chosen exclusively for illustration purposes}}
+        \end{figure}
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Overview of Methods}
+
+    \textbf{Tauchen}
+    \begin{itemize}
+      \item Constructs a histogram for a conditional distribution function
+      \item Can control the grid directly
+      \item Easy to code, easy intuition
+      \item Approximation errors with high-persistence processes
+    \end{itemize}
+
+    \vfill\pause
+
+    \textbf{Tauchen-Hussey}
+    \begin{itemize}
+      \item Constructs a histogram for a conditional distribution function
+      \item Imposes a fancy grid, no control over it (except for no.~of points)
+      \item Approximation errors with high-persistence processes
+    \end{itemize}
+
+    \vfill\pause
+
+    \textbf{Rouwenhorst}
+    \begin{itemize}
+      \item Recursively approximates a conditional distribution function
+      \item No control on grid (except for no.~of points)
+      \item Robust to high-persistence processes
+      \item ``It just works,'' non-obvious intuition
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{The Tauchen Algorithm}
+
+    \begin{enumerate}
+      \item Forget about the unconditional average of the process \hfill \dimmer{(will recover it later)}
+      \vfill\pause
+      \item Create a grid for the support $S$ of the probability distribution function \hfill \dimmer{(this is a vector)}
+      \vfill\pause
+      \item Compute all possible transitions $S' - \rho S$ \hfill \dimmer{(this is a matrix)}
+      \vfill\pause
+      \item Evaluate the relevant CDF (e.g., Gaussian) at the possible transitions
+      \vfill\pause
+      \item Make the resulting matrix such that each row sums to one
+      \vfill\pause
+      \item Shift the grid by the unconditional average, if needed
+    \end{enumerate}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{The Tauchen-Hussey Algorithm}
+
+    \begin{enumerate}
+      \item Forget about the unconditional average of the process \hfill \dimmer{(will recover it later)}
+      \vfill\pause
+      \item Obtain the grid for $S$ by computing the zeros of a Gauss-Hermite polynomial of degree $m$
+      \vfill\pause
+      \item Rescale the grid points by $\sqrt{2\sigma^2}$ \hfill \dimmer{(this is a vector)}
+      \vfill\pause
+      \item Compute the relevant \textit{conditional} PDF at the possible transitions \hfill \dimmer{(this is a matrix)}
+      \vfill\pause
+      \item Rescale the computed conditional PDF to account for discrete points
+      \vfill\pause
+      \item Normalize the matrix so that rows sum to one
+      \vfill\pause
+      \item Shift the grid by the unconditional average, if needed
+    \end{enumerate}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{The Rouwenhorst Algorithm}
+
+    \begin{enumerate}
+      \item Set $p, q \in (0, 1)$
+      \vfill\pause
+      \item For $m=2$ grid points, construct $\Pi_2$ as
+        \begin{equation*}
+          \Pi_2 =
+          \begin{bmatrix}
+            p & 1 - p \\
+            1 - q & q
+          \end{bmatrix}
+        \end{equation*}
+      \vfill\pause
+      \item For $m > 2$ grid points
+        \begin{enumerate}
+          \item Construct $\Pi_m$ as
+            \begin{equation*}
+              \Pi_m =
+              p
+              \begin{bmatrix}
+                \Pi_{m-1} & 0 \\ 0 & 0
+              \end{bmatrix}
+              + (1 - p)
+              \begin{bmatrix}
+                0 & \Pi_{m-1} \\ 0 & 0
+              \end{bmatrix}
+              + (1 - q)
+              \begin{bmatrix}
+                0 & 0 \\ \Pi_{m-1} & 0
+              \end{bmatrix}
+              + q
+              \begin{bmatrix}
+                0 & 0 \\ 0 & \Pi_{m-1}
+              \end{bmatrix}
+            \end{equation*}
+          \item Divide by 2 all but the top and bottom rows of $\Pi_m$ \hfill \dimmer{(those rows in the middle sum to 2)}
+        \end{enumerate}
+      \vfill\pause
+      \item Create a grid of linearly spaced points for the support of the PDF
+        \begin{enumerate}
+          \item Compute $f = \sqrt{N - 1} \cdot \sigma / \sqrt{1 - \rho^2}$ \hfill \dimmer{(it relates to the uncond.~variance of the AR(1))}
+          \item Create $A = \{ a_1, \ldots, a_m \}$ with $a_1 = -f$ and $a_m = f$
+          \item Shift $A$ by the unconditional average, if necessary
+        \end{enumerate}
+    \end{enumerate}
+
+    \vfill\pause
+
+    \begin{itemize}
+      \item Setting $p = q$ ensures homoskedasticity in the structure of shocks/innovations
+      \item Setting $p = q = (1 + \rho) / 2$ matches the variance of the original AR(1) process
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Ergodic Distribution}
+
+    Objective: \textbf{Compute the ergodic PDF of a Markov Chain}
+
+    \vfill
+
+    The ergodic distribution $\pi$ of a Markov Chain with transition matrix $\Pi$ is such that
+    \begin{equation*}
+      \begin{cases}
+        \pi = \Pi' \pi \\
+        \pi \iota = 1
+      \end{cases}
+    \end{equation*}
+    where $\iota$ is a vector of 1's
+
+    \vfill
+
+    The system of equations above says that
+    \begin{itemize}
+      \item The vector $\pi$ is one eigenvector of the matrix $\Pi$\dots
+      \item \dots\ in particular, the one whose elements sum to one
+    \end{itemize}
+    There are countless ways to compute the ergodic distribution, but this one works quite well
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Calibration}
+
+    \begin{table}
+      \centering
+      \begin{tabular}{clc}
+        \toprule
+        Symbol   & Meaning                     & Value \\
+        \midrule
+        \dimmer{$\alpha$} & \dimmer{Capital intensity in PF}     & \dimmer{0.30}  \\
+        \dimmer{$\beta$ } & \dimmer{Discount parameter     }     & \dimmer{0.95}  \\
+        \dimmer{$\gamma$} & \dimmer{CRRA parameter         }     & \dimmer{1.50}  \\
+        \dimmer{$\delta$} & \dimmer{Capital depreciation   }     & \dimmer{0.10}  \\
+        $\mu$    & Uncond.~avg.~of productivity   & 1.00  \\
+        $\rho$   & Persistence of productivity    & 0.70  \\
+        $\sigma$ & St.dev.~of productivity shocks & 0.10  \\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+
+    \vfill
+
+    \dimmer{The same disclaimer as in the previous class applies}
+
+    \dimmer{$\to$ The calibration presented here is not credible in any meaningful empirical setting}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Simulation}
+
+    Consider the necessary and sufficient conditions for the equilibrium in any model with rational expectations
+    \begin{equation*}
+      \E_t \left( f \left( X_{t-1}, X_t, X_{t+1} \right) \right) = 0
+    \end{equation*}
+
+    \vfill\pause
+
+    The solution to such model is a ``policy function'' $g(\cdot)$ such that
+    \begin{equation*}
+      X_{t+1} = g(X_{t-1}, X_t)
+    \end{equation*}
+    What we call here ``policy function'' $g(\cdot)$ is a vector function containing
+    \begin{itemize}
+      \item The policy functions (strictly speaking) from the Bellman problem
+      \item The laws of motion (e.g., the one for capital)
+      \item Exogenous stochastic processes (e.g., the one for productivity)
+    \end{itemize}
+
+    \vfill\pause
+
+    A simulation takes some initial conditions for $X_{t-1}$ and $X_t$ and applies the function $g(\cdot)$ repeatedly for a given series of shocks
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Simulation (cont'd)}
+
+    Steps to simulate from the Stochastic Neoclassical Growth Model
+
+    \vfill\pause
+
+    \begin{enumerate}
+      \item Set a number of periods $T$ to simulate
+      \vfill\pause
+      \item Set $K_0$, that is the initial condition
+      \vfill\pause
+      \item For each $t \in \{0, \ldots, T\}$
+      \vfill\pause
+        \begin{enumerate}
+          \item Draw a state $A_t$ from the relevant CDF
+          \vfill\pause
+          \item Compute current consumption and future capital holdings using the policy functions $C_t = C(K_t, A_t)$ and $K_{t+1} = K'(K_t, A_t)$
+          \vfill\pause
+          \item Compute all other endogenous variables using other equations of the model (e.g., production, investment)
+        \end{enumerate}
+    \end{enumerate}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Impulse-Response Functions}
+
+    Objective: \textbf{Marginal effect of an exogenous shock on an endogenous variable}
+
+    \vfill\pause
+
+    IRFs are the marginal effects of shocks on endogenous variables predicted by the model
+
+    \vfill\pause
+
+    Formally, the response at horizon $h$ of variable $X_{t+h}$ to a shock (impulse) to $S_t$ is
+    \begin{equation*}
+      IRF_{X,S}(h) \equiv \frac{\partial X_{t+h}}{\partial S_t}
+    \end{equation*}
+
+    \vfill\pause
+
+    IRFs are simple simulations
+    \begin{itemize}
+      \item The initial condition is typically the steady state of the model
+      \item At time $t$, a sudden unexpected shock realizes
+      \item At time $t+h$, for all $h>0$, all shocks are shut down
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Exercises}
+
+    \begin{enumerate}
+      \item Use the code for VFI/PFI I have shown in class \#2
+        \begin{enumerate}
+          \item Write code that, given an initial condition for the state variable, simulates the model
+          \item In what sense such simulation is uninteresting?
+        \end{enumerate}
+      \vfill
+      \item Use the code for VFI I have shown in this class
+        \begin{enumerate}
+          \item How would the discretization of the stochastic process work if $\rho = 0$ (i.e., the process of $A$ itself is a sequence of i.i.d.~random variables)?
+          \item Code up the related discretization method and solve for the policy function
+        \end{enumerate}
+      \vfill
+      \item Consider the code I have shown in this class for simulating the model
+        \begin{enumerate}
+          \item My code forces the shock to be on the grid for $A$: how would you modify the numerical policy functions (and those only!) to accomodate for any $A \in \mathbb{R}$?
+          \item Code up your answer to the previous question
+          \item Simulate the model for some periods (e.g., $T=250$)
+          \item Compute the impulse-response functions of consumption, investment and production to a one-standard deviation shock to productivity
+          \item Provide the economic intuition behind the the IRFs you have obtained
+        \end{enumerate}
+    \end{enumerate}
+
+  \end{frame}
+
+\end{document}
