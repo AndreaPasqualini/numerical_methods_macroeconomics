@@ -9,6 +9,6 @@ In this folder there are both the source LaTeX files and the compiled PDFs.
 1. Introduction to Python and Numerical Methods
 1. Value Function Iteration, Policy Function Iteration and Direct Projection in Deterministic Environments
 1. VFI, PFI and DP in Stochastic Environments and Discretization of AR(1) Processes
-1. Bewley-type Models: Huggett
-1. Bewley-type Models: Aiyagari
+1. General Equilibrium with Prices and Heterogeneous Agents
+1. Bewley-type Models: Huggett & Aiyagari
 1. TBD
