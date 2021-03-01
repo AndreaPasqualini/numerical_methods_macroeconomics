@@ -83,7 +83,7 @@
       \max_{C_t, A_{t+1}} &\; \E_0 \left( \sum_{t=0}^{\infty} \beta^t \frac{C_t^{1-\gamma}}{1-\gamma} \right) \\
       \text{s.t.} &\;
       \begin{cases}
-        C_t + A_{t+1} \leq \alert{Y_t} + (1 + \alert{r}) A_t \\
+        C_t + A_{t+1} \leq \alert{Y_t} + (1 + \alert{r}_t) A_t \\
         A_{t+1} \geq \underline{A}
       \end{cases}
     \end{align*}
@@ -115,8 +115,9 @@
     The model is numerically uninteresting, the closed form solution for the price $r$ is given by imposing $A_t^* = 0$ for all periods $t$, because we have one representative agent, therefore the net financial position must be zero
     \begin{equation*}
       \begin{cases}
-        r^* = 1 / \beta - 1 \\
-        C_t^* = Y_t
+        r_t^* = 1 / \beta - 1 & \forall\ t \\
+        C_t^* = Y & \forall\ t \\
+        A_t^* = 0 & \forall\ t
       \end{cases}
     \end{equation*}
 
@@ -134,10 +135,11 @@
 
     \vfill\pause
 
-    The market clearing condition $A_t^* = 0$ translates into this condition on the policy function
-    \begin{equation*}
-      A'(0) = 0
-    \end{equation*}
+    The market clearing condition $A_t^* = 0$ translates into this condition on the policy function: $A'(0) = 0$
+    \begin{itemize}
+      \item If $A'(0) > 0$, excess demand: RA wants to save, but nobody is there to sell assets
+      \item If $A'(0) < 0$, excess supply: RA wants to borrow, but nobody is there to buy assets
+    \end{itemize}
 
   \end{frame}
 
@@ -172,8 +174,8 @@
       \begin{column}{0.5\textwidth}
         \begin{itemize}
           \item Net excess demand: $Z(r) \equiv D(r) - S(r)$
-          \item From MWG, $Z(r)$ is decreasing
-          \item From IVT, $\exists\ r^*: Z(r^*) = 0$
+          \item From theory, $Z(r)$ is decreasing
+          \item From theory, $\exists\ r^*: Z(r^*) = 0$
         \end{itemize}
       \end{column}
       \begin{column}{0.4\textwidth}
@@ -279,12 +281,43 @@
 
     Market clearing: total savings = total borrowings
     \begin{equation*}
-      \int_A \int_Y \lambda(A, Y) A'(A, Y)\ \text{d}\, Y\ \text{d}\, A = 0
+      \int_A \int_Y \lambda(A, Y)\ A'(A, Y)\ \text{d} Y\ \text{d} A = 0
+    \end{equation*}
+    \begin{itemize}
+      \item For the household, $r$ is taken as given (like a parameter)
+      \item For the equilibrium, $r$ depends on the infinite-dimensional object $\lambda(A, Y)$
+      \item We say that $\lambda(A, Y)$ is an infinite-dimensional state variable (for the equilibrium!): infeasible in a computer, must approximate
+    \end{itemize}
+
+    \vfill\pause
+
+    \textbf{Objective:} approximate the ergodic endogenous distribution $\lambda(A, Y)$
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{HA Economy: The Endogenous Distribution of Agents}
+
+    \begin{itemize}
+      \item The exogenous matrix $\Pi$ maps $Y$ into $Y'$
+      \item The endogenous policy function $A'(A, Y)$ maps $(A, Y)$ into $A'$
+      \item Combine them to map $(A, Y)$ into $(A', Y')$
+    \end{itemize}
+
+    \vfill\pause
+
+    Formally, let $\lambda_t(A, Y)$ be the endogenous joint distribution of agents at period $t$
+    \begin{equation*}
+      \lambda_{t+1}(A', Y') = P(Y' | Y) \cdot A'(A, Y) \cdot \lambda_t(A, Y)
     \end{equation*}
 
     \vfill\pause
 
-    \textbf{Objective:} compute the ergodic endogenous distribution $\lambda(A, Y)$
+    \begin{itemize}
+      \item The transition from $(A, Y)$ to $(A', Y')$ is regulated by an endogenous Markov process
+      \item The distribution $\lambda(A, Y)$ is the ergodic distribution associated to such Markov process
+      \item We normally focus on \textbf{ergodic recursive equilibria} \hfill\dimmer{(else, too much going on)}
+    \end{itemize}
+
   \end{frame}
 
   \begin{frame}
@@ -304,10 +337,10 @@
         \begin{equation*}
           \underset{[n m \times n m]}{\bar{A}} \equiv
           \begin{bmatrix}
-            A^1 & 0 & \cdots & 0 \\
-            0 & A^2 & \cdots & 0 \\
+            \bar{A}^1 & 0 & \cdots & 0 \\
+            0 & \bar{A}^2 & \cdots & 0 \\
             \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & A^{m}
+            0 & 0 & \cdots & \bar{A}^{m}
           \end{bmatrix}
         \end{equation*}
       \item Compute the endogenous transition matrix Q as \hfill\dimmer{(maps $(A, Y)$ into $(A', Y')$)}
@@ -320,7 +353,7 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{RA Economy: Coding Approach}
+    \frametitle{HA Economy: Coding Approach}
 
     \textbf{Objective:} write a function that takes a price and returns the net excess demand at that price \\
     \textbf{Objective:} use a zero-finding routine that finds the zero of the aforementioned function
@@ -368,7 +401,7 @@
           \item Report on the speed improvements
         \end{enumerate}
       \vfill
-      \item The second example we saw today is essentially Huggett
+      \item The second example we saw today is essentially the Huggett model
         \begin{enumerate}
           \item Adapt the code such that it is written as one coherent Python \texttt{class}
           \item Generalize the code to accept any AR(1) process for the endowment process
