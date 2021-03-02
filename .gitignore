@@ -701,4 +701,7 @@ fabric.properties
 # https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml
 
+# All of ./idea folder (custom rule)
+.idea
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,pycharm,visualstudiocode,latex,python,jupyternotebooks,pycharm
