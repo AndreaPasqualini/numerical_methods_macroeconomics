@@ -1,0 +1,390 @@
+\documentclass[10pt, aspectratio=1610, natbib, handout]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{txfonts}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{appendixnumberbeamer,booktabs,tikz,pgfplots}
+\pgfplotsset{compat=1.17}
+
+\setbeamertemplate{navigation symbols}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+\definecolor{dimgray}{RGB}{170, 170, 170}
+\definecolor{alert}{RGB}{220, 0, 0}
+\definecolor{main}{RGB}{51, 51, 179}
+\definecolor{background}{RGB}{255, 255, 255}
+\newcommand{\dimmer}[1]{\textcolor{dimgray}{#1}}
+\newcommand{\gotobutton}[2]{\hyperlink{#1}{\beamergotobutton{#2}}}
+\newcommand{\backbutton}[1]{\hyperlink{#1}{\beamerreturnbutton{Back}}}
+\newcommand{\gototitlebutton}[2]{\hfill\gotobutton{#1}{#2}}
+\newcommand{\backtitlebutton}[1]{\hfill\backbutton{#1}}
+\setbeamercolor{button}{bg=main,fg=background}
+\setbeamercolor{alerted text}{fg=alert}
+
+% \newcommand{\mycite}[1]{\citeauthor{#1} (\citeyear{#1})}
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\email}[1]{\href{mailto:#1}{#1}}
+\newcommand{\website}[1]{\href{https://#1}{#1}}
+
+\title[Huggett-Aiyagari]{
+  \textbf{Bewley-type Models: Huggett \& Aiyagari}
+}
+
+\subtitle[Macro 3: TA\#5]{
+  \textbf{Macroeconomics 3:} TA class \#5
+}
+
+\author[A.~Pasqualini]{
+  Andrea Pasqualini
+}
+
+\institute[Bocconi]{Bocconi University}
+
+\date{
+  8 March 2021
+}
+
+\begin{document}
+
+  \begin{frame}
+    \maketitle
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Plan for Today}
+
+    Objective: \textbf{Replicate the results in \cite{Huggett1993} and \cite{Aiyagari1994}}
+
+    \vfill\pause
+
+    Sub-goals:
+    \begin{itemize}
+      \item Understand the papers
+      \item Learn about ``binning'' (a.k.a., non-stochastic simulations)
+      \item Learn about transition dynamics (a.k.a., MIT shocks)
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Overview}
+
+    \cite{Huggett1993}
+    \begin{itemize}
+      \item Tries to address the Equity Premium Puzzle
+      \item Uses a simple exchange economy with incomplete insurance
+      \item Solid numerical approach: guaranteed to converge
+      \item Finds that incomplete cannot account for the EPP
+    \end{itemize}
+
+    \vfill\pause
+
+    \cite{Aiyagari1994}
+    \begin{itemize}
+      \item Tries to see if precautionary savings explain aggregate savings
+      \item Uses an RBC economy with incomplete insurance
+      \item Tentative numerical approach: converges, maybe, nobody knows why
+      \item Finds that precautionary savings cannot account for aggregate savings
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Huggett: Overview}
+
+    \begin{description}
+      \item[Question] How to address the Equity Premium Puzzle (EPP) in macro models?
+      \vfill\pause
+      \item[Approach] A heterogeneous-agents model with incomplete insurance
+      \vfill\pause
+      \item[Challenge] Need to nail mechanism and quantification
+      \vfill\pause
+      \item[Findings] Preventing over-saving does it qualitatively, but not quantitatively
+    \end{description}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Huggett: Methodology}
+
+    \textbf{Equity Premium Puzzle:} spread between risk-free rate and risky rate too small in models relative to the data
+
+    \vfill\pause
+
+    Two avenues
+    \begin{itemize}
+      \item Risky rate too small in models
+      \item Risk-free rate too large in models
+    \end{itemize}
+
+    \vfill\pause
+
+    Huggett
+    \begin{itemize}
+      \item Risk-free rate is too large in models \hfill \dimmer{(at the time, innovative!)}
+      \item Can reduce the risk-free rate by reducing the demand for the risk-free asset
+      \item Two alternatives
+        \begin{itemize}
+          \item Prevent lenders from saving too much \hfill \dimmer{(unrealistic assumption)}
+          \item Prevent borrowers from taking too much debt \hfill \dimmer{(more realistic)}
+        \end{itemize}
+      \item Representative-agent models cannot cut it: requires a zero net financial position in GE
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Huggett: Model}
+
+    Ex-ante identical consumers solve the following
+    \begin{align*}
+      \max_{C_t, A_{t+1}} &\; \E_0 \left( \sum_{t=0}^{\infty} \beta^t \frac{C_t^{1-\gamma}}{1-\gamma} \right) \\
+      \text{s.t.} &\;
+      \begin{cases}
+        C_t + A_{t+1} \leq Y_t + (1 + r_t) A_t & \forall\ t \\
+        A_{t+1} \geq \underline{A} & \forall\ t \\
+        \log(Y_{t+1}) = (1 - \rho) \mu + \rho \log(Y_t) + \varepsilon_{t+1} & \forall\ t \\
+        \varepsilon_{t} \overset{iid}{\sim} \mathcal{N}(0, \sigma^2) & \forall\ t
+      \end{cases}
+    \end{align*}
+
+    \vfill\pause
+
+    The borrowing constraint $\underline{A}$ is such that it may bind for some consumers (i.e., $\underline{A}$ is higher than the natural debt limit)
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Huggett: Numerical Approach}
+
+    \begin{enumerate}
+      \item At iteration $j$, guess an equilibrium interest rate $r^{(j)}$
+      \vfill\pause
+      \item Solve for the policy function $A'(A, Y)$
+      \vfill\pause
+      \item Combine $A'(A, Y)$ with $\Pi$ to obtain the endogenous transition matrix $Q$
+      \vfill\pause
+      \item Compute the ergodic distribution $\lambda(A, Y)$ by iterating $Q$ enough times
+      \vfill\pause
+      \item Compute the net excess demand $E^d(r) = \sum_A \sum_Y \lambda(A, Y)\ A'(A, Y)$
+      \vfill\pause
+      \item Use a root-solver to bring the LHS to the RHS (i.e., zero)
+        \begin{itemize}
+          \item If $E^d \left( r^{(j)} \right) > 0$, then $r^{(j)} < r^*$
+          \item If $E^d \left( r^{(j)} \right) < 0$, then $r^{(j)} > r^*$
+          \item Set $r^{(j+1)}$ accordingly and repeat 2--6
+        \end{itemize}
+    \end{enumerate}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Aiyagari: Overview}
+
+    \begin{description}
+      \item[Question] What are the determinants of aggregate savings in the US?
+      \vfill\pause
+      \item[Approach] A heterogeneous-agents RBC model
+      \vfill\pause
+      \item[Challenge] Lucas' diversification argument: idiosyncrasies average out in the aggregate
+      \vfill\pause
+      \item[Findings]
+        \begin{itemize}
+          \item Precautionary savings do not matter for aggregate savings, quantitatively
+          \item Can generate precautionary savings without prudence
+          \item Model matches the US cross-sectional distribution of household wealth
+        \end{itemize}
+    \end{description}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Aiyagari: Methodology}
+
+    Fix aggregate (capital) savings $K$
+
+    \vfill\pause
+
+    Look at composition of the aggregate
+    \begin{itemize}
+      \item Thourough exploration of endogenous distribution of agents
+      \item Focus on left tail of wealth distribution (constrained, or almost, agents)
+    \end{itemize}
+
+    \vfill\pause
+
+    Features of the model
+    \begin{itemize}
+      \item Relatability: just an RBC model
+      \item Source of heterogeneity: labor endowments
+      \item No aggregate uncertainty: prices $r$ and $w$ fixed in equilibrium
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Aiyagari: Model}
+
+    \begin{columns}[T]
+      \begin{column}{0.45\textwidth}
+        Households (demand side)
+        \begin{align*}
+          \max_{c_t, k_{t+1}} &\; \E_0 \left( \sum_{t=0}^{\infty} \beta^t\ \frac{c_t^{1-\gamma}}{1-\gamma} \right) \\
+          \text{s.t.} &\;
+          \begin{cases}
+            c_t + k_{t+1} \leq w l_t + (1 + r) k_t & \forall\ t \\
+            c_t, k_{t+1} \geq 0 & \forall\ t \\
+            l_{t+1} = (1 - \rho) \mu + \rho l_t + \varepsilon_{t+1} & \forall\ t \\
+            \varepsilon_t \overset{iid}{\sim} \mathcal{N}(0, \sigma^2) & \forall\ t
+          \end{cases}
+        \end{align*}
+      \end{column}
+      \begin{column}{0.45\textwidth}
+        Firms (supply side) \\ \dimmer{(note: no time subscripts)}
+        \begin{align*}
+          \max_{K, L} &\; A K^\alpha L^{1-\alpha} - r K - w L
+        \end{align*}
+      \end{column}
+    \end{columns}
+
+    \vfill\pause
+
+    Market clearing (recursive notation, ergodic equilibrium)
+    \begin{equation*}
+      K = \int_{k} \int_{l} \lambda(k, l)\ k'(k, l) \text{d} l\ \text{d} k
+    \end{equation*}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Aiyagari: Numerical Approach}
+
+    \begin{enumerate}
+      \item At iteration $j$, guess an aggregate level of capital holdings $K^{(j)}$
+      \vfill\pause
+      \item Use the FOCs of the firm to compute $r$ and $w$
+      \vfill\pause
+      \item Solve for the households' policy function $k'(k, l)$
+      \vfill\pause
+      \item Combine $\Pi$ with $k'(k, l)$ to obtain the endogenous transition matrix $Q$
+      \vfill\pause
+      \item Compute the ergodic distribution $\lambda(k, l)$ by iterating $Q$ enough times
+      \vfill\pause
+      \item Compute aggregate savings $\hat{K}$ as
+        \begin{equation*}
+          \hat{K} \equiv \sum_{k} \sum_l \lambda(k, l)\ k'(k, l)
+        \end{equation*}
+      \vfill\pause
+      \item Check if $\hat{K}$ is consistent with $K^{(j)}$
+        \begin{itemize}
+          \item If $\hat{K} \neq K^{(j)}$, then set $K^{(j+1)}$ using the dampening scheme for $\theta \in [0, 1]$
+            \begin{equation*}
+              K^{(j+1)} \equiv \theta \hat{K} + (1 - \theta) K^{(j)}
+            \end{equation*}
+          \item Repeat steps 2--7
+        \end{itemize}
+    \end{enumerate}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Are These Bewley-Type Models? Yes!}
+
+    \begin{itemize}
+      \item Consumers are ex-ante identical
+        \begin{itemize}
+          \item One maximization problem describes everybody (ex-ante!)
+          \item Idiosyncratic uncertainty and policy functions place consumers differently on the distribution of asset holdings
+        \end{itemize}
+
+      \vfill\pause
+
+      \item In equilibrium, consumers are heterogeneous
+        \begin{itemize}
+          \item At the ``dawn of time,'' there is a distribution of agents, depending on endowments
+          \item Based on (different) income, consumers choose (different) savings
+        \end{itemize}
+
+      \vfill\pause
+
+      \item At the \textit{ergodic} equilibrium
+        \begin{itemize}
+          \item Consumers are distributed according to an endogenous ergodic distribution
+          \item The \textit{ergodic} distr.~does \textbf{not} mean that there is no dynamics (i.e., not a deterministic steady s.)
+          \item Across periods, consumers are ``reshuffled'' such that the ergodic distribution is maintained
+        \end{itemize}
+
+      \vfill\pause
+
+      \item Technical note
+        \begin{itemize}
+          \item There is idiosyncratic uncertainty
+          \item There is \textbf{no} aggregate uncertainty
+        \end{itemize}
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Comparing Huggett \& Aiyagari}
+
+    They look like the same model\dots\ They are, almost
+
+    \vfill\pause
+
+    \begin{table}
+      \centering
+      \begin{tabular}{lll}
+        \toprule
+        & \textbf{Huggett} & \textbf{Aiyagari} \\
+        \cmidrule{2-3}
+        Supply side & Exogenous & Endogenous \\
+        Financial market & Asset & Capital \\
+        Research question & Equity Premium Puzzle & Composition of aggr.~savings \\
+        Numerical solution & Net excess demand & Consistency w/~guess \\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+
+    \vfill\pause
+
+    \begin{itemize}
+      \item Huggett is closer to a simple exchange economy
+      \item Aiyagari is closer to the RBC model
+      \item Huggett's numerical approach converges for sure
+      \item Aiyagari's numerical approach converges\dots\ nobody knows why
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Practice Time}
+
+    Moving to a Jupyter Notebook
+
+  \end{frame}
+
+  \appendix
+
+
+  \begin{frame}
+    \frametitle{References}
+
+    \bibliographystyle{apalike}
+    \bibliography{references}
+
+  \end{frame}
+
+
+\end{document}
