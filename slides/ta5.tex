@@ -327,7 +327,7 @@
 
       \vfill\pause
 
-      \item Technical note
+      \item Technical note (nothing to do with Bewley type-ness)
         \begin{itemize}
           \item There is idiosyncratic uncertainty
           \item There is \textbf{no} aggregate uncertainty
@@ -359,11 +359,17 @@
 
     \vfill\pause
 
+    \textbf{Fundamental difference} in numerical algorithm:
     \begin{itemize}
-      \item Huggett is closer to a simple exchange economy
-      \item Aiyagari is closer to the RBC model
-      \item Huggett's numerical approach converges for sure
-      \item Aiyagari's numerical approach converges\dots\ nobody knows why
+      \item Aiyagari assumes that $K$ is a sufficient statistic for $\lambda(k, l)$
+      \item Assumption is baked-in the optimization problem of firms (i.e., FOC wrt $K$)
+      \item This assumption makes the algorithm unreliable, from a maths/theory point of view
+      \item ``It converges, but nobody knows why''
+        \begin{itemize}
+          \item Is the convergence point an equilibrium?
+          \item Is the equilibrium unique?
+          \item Is this equilibrium cherry-picked?
+        \end{itemize}
     \end{itemize}
 
   \end{frame}
