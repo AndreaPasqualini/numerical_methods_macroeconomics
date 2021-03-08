@@ -1,41 +1,5 @@
 \documentclass[10pt, aspectratio=1610, natbib, handout]{beamer}
-\usepackage[utf8]{inputenc}
-\usepackage{txfonts}
-\usepackage{amsfonts,amssymb,amsmath}
-\usepackage[T1]{fontenc}
-\usepackage{appendixnumberbeamer,booktabs,tikz,pgfplots}
-\pgfplotsset{compat=1.17}
-
-\setbeamertemplate{navigation symbols}{%
-    \usebeamerfont{footline}%
-    \usebeamercolor[fg]{footline}%
-    \hspace{1em}%
-    \insertframenumber/\inserttotalframenumber
-}
-
-\hypersetup{
-  colorlinks=true,
-  linkcolor=black,
-  urlcolor=blue,
-  citecolor=black
-}
-
-\definecolor{dimgray}{RGB}{170, 170, 170}
-\definecolor{alert}{RGB}{220, 0, 0}
-\definecolor{main}{RGB}{51, 51, 179}
-\definecolor{background}{RGB}{255, 255, 255}
-\newcommand{\dimmer}[1]{\textcolor{dimgray}{#1}}
-\newcommand{\gotobutton}[2]{\hyperlink{#1}{\beamergotobutton{#2}}}
-\newcommand{\backbutton}[1]{\hyperlink{#1}{\beamerreturnbutton{Back}}}
-\newcommand{\gototitlebutton}[2]{\hfill\gotobutton{#1}{#2}}
-\newcommand{\backtitlebutton}[1]{\hfill\backbutton{#1}}
-\setbeamercolor{button}{bg=main,fg=background}
-\setbeamercolor{alerted text}{fg=alert}
-
-% \newcommand{\mycite}[1]{\citeauthor{#1} (\citeyear{#1})}
-\newcommand{\E}{\mathbf{E}}
-\newcommand{\email}[1]{\href{mailto:#1}{#1}}
-\newcommand{\website}[1]{\href{https://#1}{#1}}
+\usepackage{common}
 
 \title[Huggett-Aiyagari]{
   \textbf{Bewley-type Models: Huggett \& Aiyagari}
