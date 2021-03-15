@@ -11,4 +11,4 @@ In this folder there are both the source LaTeX files and the compiled PDFs.
 1. VFI, PFI and DP in Stochastic Environments and Discretization of AR(1) Processes
 1. General Equilibrium with Prices and Heterogeneous Agents
 1. Bewley-type Models: Huggett & Aiyagari
-1. TBD
+2. Web Scraping
